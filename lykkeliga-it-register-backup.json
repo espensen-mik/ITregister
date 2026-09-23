@@ -1,0 +1,342 @@
+[
+  {
+    "name": "Google Workspace",
+    "category": "Kontor & samarbejde",
+    "purpose": "Mail, filer, dokumenter, regneark, chat og øvrige Google-værktøjer",
+    "price": "3270",
+    "note": "Omfatter Gmail, Drive, Docs, Sheets, Chat m.m.",
+    "status": "Aktiv",
+    "id": "4b3447da-a877-4326-af67-d0c89ff7bf78",
+    "monthlyPrice": ""
+  },
+  {
+    "name": "WordPress",
+    "category": "Website & webshop",
+    "purpose": "CMS til LykkeLiga.dk",
+    "price": "",
+    "note": "Nuværende website-platform",
+    "status": "Aktiv",
+    "id": "d198d3fc-c9ca-4765-9c97-bf31a83e15e1"
+  },
+  {
+    "name": "Weltklasse",
+    "category": "Website & webshop",
+    "purpose": "Hosting/drift af LykkeLiga.dk",
+    "price": "",
+    "note": "Ønske om senere at flytte til hosting, LykkeLiga selv styrer",
+    "status": "Undersøg",
+    "id": "8f2261c6-95f8-4d42-a12a-d285cf64a092"
+  },
+  {
+    "name": "Curanet",
+    "category": "Website & webshop",
+    "purpose": "Hosting-infrastruktur/reseller bag Weltklasse",
+    "price": "",
+    "note": "Skal verificeres",
+    "status": "Undersøg",
+    "id": "6aa8af34-7e1d-4aa8-be3b-00b2b7189f7f"
+  },
+  {
+    "name": "Divi",
+    "category": "Website & webshop",
+    "purpose": "WordPress page builder/design",
+    "price": "",
+    "note": "Vores Divi licens er betalt gennem udviklingen i samarbejde med Weltklasse. Bortfalder formentlig hvis vi skifter leverandør)",
+    "status": "Aktiv",
+    "id": "d8a1f81d-97b1-4dff-9dff-dbbc64ab311d"
+  },
+  {
+    "name": "The Events Calendar",
+    "category": "Website & webshop",
+    "purpose": "Kalender og events",
+    "price": "975",
+    "note": "",
+    "status": "Aktiv",
+    "id": "82f7637f-021f-438b-92a0-a7c0a4e39672"
+  },
+  {
+    "name": "Event Tickets",
+    "category": "Website & webshop",
+    "purpose": "Billetter og tilmeldinger",
+    "price": "975",
+    "note": "Del af The Events Calendar-økosystemet",
+    "status": "Aktiv",
+    "id": "1bcf898d-05f9-4087-ac9d-a0c7a554c264"
+  },
+  {
+    "name": "WooCommerce",
+    "category": "Website & webshop",
+    "purpose": "Webshop og betalingsflow",
+    "price": "",
+    "note": "",
+    "status": "Aktiv",
+    "id": "ef41ce52-390c-4c79-9f54-69655102ee55"
+  },
+  {
+    "name": "QuickPay",
+    "category": "Website & webshop",
+    "purpose": "Payment gateway",
+    "price": "1188",
+    "note": "",
+    "status": "Aktiv",
+    "id": "e13da6c5-89e6-4bb3-b7b5-49e09f62388a"
+  },
+  {
+    "name": "Clearhaus",
+    "category": "Website & webshop",
+    "purpose": "Kortindløser",
+    "price": "",
+    "note": "",
+    "status": "Aktiv",
+    "id": "aae645f4-e522-4a10-821b-237c1a8f62ad"
+  },
+  {
+    "name": "Simply.com",
+    "category": "Domæner & DNS",
+    "purpose": "Domæner og DNS",
+    "price": "",
+    "note": "LykkeLiga-konto. Bl.a. LykkeCup, HappyLeague m.fl.",
+    "status": "Aktiv",
+    "id": "38f434b1-5dc7-4cff-a6db-834ea36ec4b4"
+  },
+  {
+    "name": "Cursor",
+    "category": "Udvikling & hosting",
+    "purpose": "AI-assisteret udvikling",
+    "price": "1571",
+    "note": "Betalt version",
+    "status": "Aktiv",
+    "id": "0cc8fd71-b67a-42b0-8eeb-a79d9f154a11"
+  },
+  {
+    "name": "GitHub",
+    "category": "Udvikling & hosting",
+    "purpose": "Kode, repositories og versionsstyring",
+    "price": "",
+    "note": "",
+    "status": "Aktiv",
+    "id": "c126b1f0-674f-4d48-848d-33b9e4f47b8a"
+  },
+  {
+    "name": "Vercel",
+    "category": "Udvikling & hosting",
+    "purpose": "Hosting og deployment af egenudviklede webapps",
+    "price": "1964",
+    "note": "Vercel Pro",
+    "status": "Aktiv",
+    "id": "e3969959-5f1e-4940-b1b3-f62066626e58"
+  },
+  {
+    "name": "Supabase",
+    "category": "Udvikling & hosting",
+    "purpose": "Database og backend",
+    "price": "2749",
+    "note": "",
+    "status": "Aktiv",
+    "id": "06babac6-4128-4a5e-bf71-796aee24ef25"
+  },
+  {
+    "name": "Resend",
+    "category": "Udvikling & hosting",
+    "purpose": "Transaktionelle mails fra webapps",
+    "price": "",
+    "note": "",
+    "status": "Aktiv",
+    "id": "f13ee187-5e69-4e84-a371-59c761f8841b"
+  },
+  {
+    "name": "LykkeCup-platformen",
+    "category": "Egenudviklede systemer",
+    "purpose": "Mobil webapp + backend til afvikling af LykkeCup",
+    "price": "0",
+    "note": "Turneringsplan m.m.",
+    "status": "Aktiv",
+    "id": "6fd92560-7fa5-48a5-b055-71aa47c3ae70"
+  },
+  {
+    "name": "LykkeLiga Jukebox",
+    "category": "Egenudviklede systemer",
+    "purpose": "Mobil webapp/PWA med LykkeLiga-sange",
+    "price": "0",
+    "note": "",
+    "status": "Aktiv",
+    "id": "9020d317-a767-4a66-b23b-d7e227a186b2"
+  },
+  {
+    "name": "business.lykkeliga.dk / Legekammerater",
+    "category": "Egenudviklede systemer",
+    "purpose": "Site til partnerskaber og salg",
+    "price": "0",
+    "note": "Udviklet i Cursor, GitHub/Vercel, bruger Resend",
+    "status": "Aktiv",
+    "id": "999b63fd-7c65-4ead-9e70-b3cf5e4ba823"
+  },
+  {
+    "name": "LykkeCup QR-scanner",
+    "category": "Egenudviklede systemer",
+    "purpose": "QR-scanning af billetter",
+    "price": "0",
+    "note": "Bygget internt som backup/erstatning ved LykkeCup",
+    "status": "Aktiv",
+    "id": "b9edb45a-996f-4621-bc04-ff81dd6f3be5"
+  },
+  {
+    "name": "Airtable",
+    "category": "Data & CRM",
+    "purpose": "Opbevaring og visualisering af klub-, spiller- og øvrige data",
+    "price": "",
+    "note": "Sandsynligvis gratis version – skal tjekkes",
+    "status": "Undersøg",
+    "id": "268f4b3b-58db-442b-8046-5845a8f98eba"
+  },
+  {
+    "name": "Adobe Creative Cloud",
+    "category": "Foto, video & kreativt",
+    "purpose": "Photoshop, Illustrator, Premiere Pro, After Effects m.m.",
+    "price": "3600",
+    "note": "Årslicens med NGO-rabat - 1 licens (Mikael)",
+    "status": "Aktiv",
+    "id": "0776d2f3-58f3-4e73-8283-d7f427635ec0",
+    "monthlyPrice": "300"
+  },
+  {
+    "name": "Frame.io",
+    "category": "Foto, video & kreativt",
+    "purpose": "Video-review, godkendelse og deling",
+    "price": "1464",
+    "note": "",
+    "status": "Aktiv",
+    "id": "cc716008-c40d-4777-aeb7-61cc1c81d299"
+  },
+  {
+    "name": "MUX",
+    "category": "Foto, video & kreativt",
+    "purpose": "Videohosting/streaming på websites",
+    "price": "",
+    "note": "",
+    "status": "Aktiv",
+    "id": "ef5ac872-34b7-4e91-952e-2bca9f95ba6f"
+  },
+  {
+    "name": "SmugMug",
+    "category": "Foto, video & kreativt",
+    "purpose": "Fotoarkiv og deling",
+    "price": "903",
+    "note": "Ca. 9 års fotoarkiv, bl.a. fra LykkeCup",
+    "status": "Aktiv",
+    "id": "6264e5ad-d86d-4b2f-9b41-a07c892753fc"
+  },
+  {
+    "name": "Canva for Nonprofits",
+    "category": "Foto, video & kreativt",
+    "purpose": "Grafik, templates og brand kits",
+    "price": "0",
+    "note": "NGO Pro",
+    "status": "Aktiv",
+    "id": "ff3379df-7a4b-4bd5-83af-c4aedfd46282"
+  },
+  {
+    "name": "Kittl",
+    "category": "Foto, video & kreativt",
+    "purpose": "AI/designværktøj",
+    "price": "1178",
+    "note": "Årslicens; forventes ikke fornyet. Testes til bl.a. nemme og hurtige mockups og design.",
+    "status": "Opsig",
+    "id": "2202e96e-0713-4e3a-826e-63aa152c0d3c",
+    "monthlyPrice": ""
+  },
+  {
+    "name": "Envato Elements",
+    "category": "Foto, video & kreativt",
+    "purpose": "Musik, SFX, templates og After Effects-assets",
+    "price": "1296",
+    "note": "Årslicens",
+    "status": "Aktiv",
+    "id": "0b980773-040b-42e3-9981-d006c3735145"
+  },
+  {
+    "name": "ChatGPT",
+    "category": "AI & musik",
+    "purpose": "AI, tekst, analyse, udvikling og idéarbejde",
+    "price": "3142",
+    "note": "2 stk pro konti (Mikael & Signe)",
+    "status": "Undersøg",
+    "id": "077762b1-9cf4-4015-83b8-3bd2b49c0e21"
+  },
+  {
+    "name": "Suno",
+    "category": "AI & musik",
+    "purpose": "AI-musikproduktion",
+    "price": "1885,5",
+    "note": "Stor/betalt årslicens udløber 12. dec. Indkøbt i forbindelse med AI musik projekt",
+    "status": "Aktiv",
+    "id": "2529bf22-77d7-4835-849c-60e211664f22",
+    "monthlyPrice": ""
+  },
+  {
+    "name": "BandLab",
+    "category": "AI & musik",
+    "purpose": "Online DAW/musikproduktion",
+    "price": "648",
+    "note": "Plan skal undersøges - indkøbt i forbindelse med AI musikprojekt. Opsagt per 20. nov 2026",
+    "status": "Undersøg",
+    "id": "cf46d38e-9dd7-4bfb-add7-52928c65eaf2",
+    "monthlyPrice": ""
+  },
+  {
+    "name": "Jotform",
+    "category": "Formularer & undersøgelser",
+    "purpose": "Spørgeskemaer og formularer",
+    "price": "",
+    "note": "",
+    "status": "Aktiv",
+    "id": "788ed355-703d-4c2f-a5de-4e28cc1e608e"
+  },
+  {
+    "name": "HeyLoyalty",
+    "category": "Nyhedsbrev",
+    "purpose": "Nyhedsbreve og modtagerlister",
+    "price": "8580",
+    "note": "",
+    "status": "Aktiv",
+    "id": "93790d70-19fa-4a59-a1bb-db34b9338142",
+    "monthlyPrice": "715"
+  },
+  {
+    "name": "OnlineFundraising",
+    "category": "Fundraising & betaling",
+    "purpose": "Donationer, fanklub og tilbagevendende betalinger",
+    "price": "11760",
+    "note": "",
+    "status": "Aktiv",
+    "id": "d27170ff-c19b-448a-b2f4-1be5c671e41a",
+    "monthlyPrice": "980"
+  },
+  {
+    "name": "Trello",
+    "category": "Projektstyring",
+    "purpose": "Projekt- og opgavestyring",
+    "price": "",
+    "note": "Bruges ad hoc",
+    "status": "Aktiv",
+    "id": "4d5bfa4a-b0c6-4e2e-a8ad-d070aeb86aa2"
+  },
+  {
+    "name": "OptiSigns",
+    "category": "Digital signage",
+    "purpose": "Digital skiltning til bl.a. LykkeCup og skærme",
+    "price": "4485",
+    "note": "Ca. 4 skærme/licenser; hardware skal optælles",
+    "status": "Aktiv",
+    "id": "4540509d-bd90-4dd7-9c56-a44d5744a1be"
+  },
+  {
+    "name": "Intempus",
+    "category": "Administration",
+    "purpose": "Timeregistrering",
+    "price": "",
+    "note": "Nyt system",
+    "status": "Aktiv",
+    "id": "1a6733dd-fac2-4e82-90d0-a79dd2c9bd84"
+  }
+]

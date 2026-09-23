@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LykkeLiga • IT Register</title>
+<style>
+:root{
+ --bg:#0c0d0f; --panel:#15171a; --panel2:#1b1e22; --text:#f3f4f6; --muted:#8e949f;
+ --line:#2a2e34; --yellow:#ffd84d; --yellow2:#f4c933; --green:#6ee7a8; --red:#ff7b7b;
+ --orange:#f2b263;
+}
+*{box-sizing:border-box} html{color-scheme:dark}
+body{margin:0;background:
+ radial-gradient(circle at 90% 0%, rgba(255,216,77,.08), transparent 28rem),
+ var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+.shell{max-width:1500px;margin:auto;padding:28px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:30px}
+.brand{display:flex;align-items:center;gap:14px}
+.mark{width:44px;height:44px;border-radius:14px;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:950;font-size:17px}
+.eyebrow{color:var(--yellow);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+h1{font-size:34px;line-height:1.1;margin:3px 0 0;letter-spacing:-.035em}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+button{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:11px;padding:10px 14px;font-weight:750;cursor:pointer}
+button:hover{border-color:#454b54}
+button.primary{background:var(--yellow);border-color:var(--yellow);color:#111}
+.dashboard{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:13px;margin-bottom:15px}
+.hero,.metric{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel2),var(--panel));padding:20px}
+.hero{min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.heroLabel,.metricLabel{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.11em;font-weight:800}
+.heroValue{font-size:44px;font-weight:900;letter-spacing:-.05em;margin-top:12px}
+.heroMeta{color:var(--muted);font-size:13px;margin-top:8px}
+.metricValue{font-size:31px;font-weight:900;letter-spacing:-.04em;margin-top:18px}
+.metricSub{color:var(--muted);font-size:12px;margin-top:7px}
+.progress{height:7px;border-radius:999px;background:#292c31;overflow:hidden;margin-top:14px}
+.progress>div{height:100%;background:var(--yellow);border-radius:999px}
+.grid2{display:grid;grid-template-columns:1fr 340px;gap:15px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.panelHead{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 18px;border-bottom:1px solid var(--line)}
+.panelTitle{font-weight:850;font-size:15px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.search,.select{border:1px solid var(--line);background:#101215;color:var(--text);border-radius:10px;padding:9px 11px;outline:none}
+.search{width:270px}.select{min-width:155px}
+.tableWrap{overflow:auto;max-height:680px}
+table{width:100%;min-width:1000px;border-collapse:collapse}
+th{position:sticky;top:0;z-index:2;background:#121417;color:#737985;font-size:10px;text-transform:uppercase;letter-spacing:.09em;text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid #23272c;vertical-align:middle}
+tr:hover td{background:#171a1e}
+.name{font-weight:820}.purpose{color:#b8bdc6;font-size:13px}
+.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;background:#23272d;color:#c9ced6}
+.dot{width:6px;height:6px;border-radius:50%;background:#888}
+.status-Aktiv .dot{background:var(--green)} .status-Undersøg .dot{background:var(--orange)} .status-Opsig .dot{background:var(--red)}
+.inline{width:100%;background:#101215;border:1px solid transparent;color:var(--text);border-radius:8px;padding:8px 9px}
+.inline:hover,.inline:focus{border-color:#3a4048;outline:none}.price{width:105px}
+.del{padding:7px 9px;color:#aaa;background:transparent}.del:hover{color:var(--red)}
+.side{padding:18px}
+.side h3{margin:0 0 14px;font-size:15px}
+.catList{display:flex;flex-direction:column;gap:9px}
+.catRow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}
+.catName{font-size:12px;color:#c8ccd3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.catBar{grid-column:1/-1;height:5px;background:#24282d;border-radius:999px;overflow:hidden}
+.catBar>div{height:100%;background:var(--yellow);border-radius:999px}
+.small{color:var(--muted);font-size:12px}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.legend .tag{background:transparent;padding:0}
+.modalBg{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;place-items:center;padding:20px;z-index:99}
+.modalBg.open{display:grid}.modal{width:min(640px,100%);background:#15171a;border:1px solid #32363d;border-radius:18px;padding:21px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+.modal h2{margin:0 0 17px}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.full{grid-column:1/-1}
+label{font-size:12px;color:#abb0b8;font-weight:700}.field input,.field select,.field textarea{background:#0f1113;border:1px solid #30343a;color:white;border-radius:10px;padding:10px 11px;outline:none}
+textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-content:flex-end;gap:9px;margin-top:17px}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+
+
+.infoBtn{
+  display:inline-flex;align-items:center;gap:7px;border:1px solid #343941;background:#101215;
+  color:#d8dce3;border-radius:9px;padding:8px 10px;font-weight:750
+}
+.infoBtn:hover{background:#1c2025;border-color:#4a515b}
+.infoBtn .i{
+  width:18px;height:18px;border-radius:50%;display:grid;place-items:center;
+  background:#272c32;color:var(--yellow);font-size:11px;font-weight:900
+}
+.notePreview{color:#8f96a1;font-size:12px;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.detailMeta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.detailBox{background:#101215;border:1px solid #2f343b;border-radius:12px;padding:12px}
+.detailLabel{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#7d8490;font-weight:800;margin-bottom:5px}
+.detailValue{font-size:14px;color:#eef0f3}
+
+
+/* Quick cost calculator */
+.calcBar{
+  position:sticky;bottom:0;z-index:25;margin-top:12px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:14px 16px;border:1px solid #3a3f46;border-radius:14px;
+  background:rgba(20,23,26,.96);backdrop-filter:blur(10px);
+  box-shadow:0 -8px 30px rgba(0,0,0,.28)
+}
+.calcLeft{display:flex;align-items:center;gap:12px;min-width:0}
+.calcBadge{
+  width:34px;height:34px;border-radius:10px;background:var(--yellow);color:#111;
+  display:grid;place-items:center;font-weight:950
+}
+.calcTitle{font-weight:850}
+.calcSub{font-size:12px;color:var(--muted);margin-top:2px}
+.calcTotal{text-align:right}
+.calcTotal .label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
+.calcTotal .value{font-size:24px;font-weight:900;letter-spacing:-.03em;margin-top:2px}
+.pickBox{
+  width:18px;height:18px;accent-color:var(--yellow);cursor:pointer
+}
+.pickHead{width:36px}
+.calcActions{display:flex;gap:8px;align-items:center}
+.calcActions button{padding:8px 10px}
+@media(max-width:800px){
+  .calcBar{align-items:flex-start;flex-direction:column}
+  .calcTotal{text-align:left}
+}
+
+/* Custom dropdowns – replaces native select menus */
+.dd{position:relative;display:inline-block;min-width:155px}
+.ddBtn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border:1px solid var(--line);background:#101215;color:var(--text);border-radius:10px;
+  padding:9px 11px;font-weight:650;cursor:pointer;white-space:nowrap
+}
+.ddBtn:hover,.dd.open .ddBtn{border-color:#444a53;background:#14171a}
+.ddChevron{width:8px;height:8px;border-right:2px solid #9aa0aa;border-bottom:2px solid #9aa0aa;transform:rotate(45deg) translateY(-2px);transition:.15s}
+.dd.open .ddChevron{transform:rotate(225deg) translate(-2px,-2px)}
+.ddMenu{
+  position:absolute;right:0;top:calc(100% + 7px);min-width:100%;padding:6px;
+  border:1px solid #343941;background:#171a1e;border-radius:12px;
+  box-shadow:0 18px 45px rgba(0,0,0,.48);z-index:40;display:none
+}
+.dd.open .ddMenu{display:block}
+.ddOption{
+  display:flex;align-items:center;gap:9px;width:100%;border:0;background:transparent;color:#d9dde3;
+  padding:9px 10px;border-radius:8px;font-weight:650;text-align:left;cursor:pointer
+}
+.ddOption:hover{background:#24282e;color:#fff}
+.ddOption.selected{background:#2a2e34;color:#fff}
+.ddOption .check{width:16px;color:var(--yellow);font-weight:900}
+.rowDD{min-width:112px}
+.rowDD .ddBtn{padding:7px 9px;border-color:transparent;background:#101215;border-radius:8px}
+.rowDD .ddMenu{left:0;right:auto;min-width:145px}
+.statusPill{display:flex;align-items:center;gap:8px}
+.statusPill .dot{width:7px;height:7px}
+
+@media(max-width:1100px){.dashboard{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.side{display:none}}
+@media(max-width:700px){.shell{padding:14px}.topbar{align-items:flex-start;flex-direction:column}.dashboard{grid-template-columns:1fr}.search{width:100%}.panelHead{align-items:flex-start;flex-direction:column}}
+
+/* Simple access gate */
+#accessGate{
+  position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+  background:radial-gradient(circle at 80% 10%, rgba(255,216,77,.10), transparent 28rem), #0c0d0f;
+  padding:20px;
+}
+#accessGate.hidden{display:none}
+.gateCard{
+  width:min(420px,100%);background:#15171a;border:1px solid #30343a;border-radius:20px;
+  padding:26px;box-shadow:0 30px 90px rgba(0,0,0,.55)
+}
+.gateMark{
+  width:48px;height:48px;border-radius:15px;background:var(--yellow);color:#111;
+  display:grid;place-items:center;font-weight:950;margin-bottom:18px
+}
+.gateCard h2{margin:0 0 8px;font-size:26px;letter-spacing:-.03em}
+.gateCard p{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.5}
+.gateField{display:flex;gap:9px}
+.gateField input{
+  flex:1;background:#0f1113;border:1px solid #30343a;color:#fff;border-radius:10px;
+  padding:11px 12px;outline:none
+}
+.gateField input:focus{border-color:#555c66}
+.gateError{min-height:18px;color:var(--red);font-size:12px;margin-top:8px}
+
+</style>
+</head>
+<body>
+
+<div id="accessGate">
+  <div class="gateCard">
+    <div class="gateMark">LL</div>
+    <h2>IT Register</h2>
+    <p>Internt LykkeLiga-værktøj. Indtast adgangskoden for at fortsætte.</p>
+    <div class="gateField">
+      <input id="gatePassword" type="password" placeholder="Adgangskode" autocomplete="current-password">
+      <button class="primary" id="gateLogin">Åbn</button>
+    </div>
+    <div class="gateError" id="gateError"></div>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">
+      <div class="mark">LL</div>
+      <div><div class="eyebrow">LykkeLiga Control Center</div><h1>IT Register</h1></div>
+    </div>
+    <div class="actions">
+      <button id="export">Eksportér backup</button>
+      <button class="primary" id="add">+ Nyt system</button>
+    </div>
+  </div>
+
+  <section class="dashboard">
+    <div class="hero">
+      <div>
+        <div class="heroLabel">Kendt årlig softwareudgift</div>
+        <div class="heroValue" id="total">0 kr.</div>
+        <div class="heroMeta" id="coverage">0 af 0 systemer har en pris</div>
+      </div>
+      <div class="progress"><div id="coverageBar" style="width:0%"></div></div>
+    </div>
+    <div class="metric"><div class="metricLabel">Systemer</div><div class="metricValue" id="systems">0</div><div class="metricSub">Aktive, egne og eksterne</div></div>
+    <div class="metric"><div class="metricLabel">Mangler pris</div><div class="metricValue" id="missing">0</div><div class="metricSub">Skal kortlægges</div></div>
+    <div class="metric"><div class="metricLabel">Til undersøgelse</div><div class="metricValue" id="investigate">0</div><div class="metricSub">Kræver opfølgning</div></div>
+  </section>
+
+  <div class="grid2">
+    <section class="panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Systemoversigt</div>
+          <div class="small">Redigér pris, status og note direkte i listen</div>
+        </div>
+        <div class="filters">
+          <input class="search" id="search" placeholder="Søg i registeret…">
+          <div id="catDD"></div>
+          <div id="statusDD"></div>
+        </div>
+      </div>
+      <div class="tableWrap">
+        <table>
+          <thead><tr><th class="pickHead"><input type="checkbox" id="selectAll" class="pickBox" title="Vælg alle viste"></th><th>System</th><th>Kategori</th><th>Status</th><th>Pris / år</th><th>Om systemet</th><th></th></tr></thead>
+          <tbody id="body"></tbody>
+        </table>
+        <div class="empty" id="empty" style="display:none">Ingen systemer matcher dit filter.</div>
+      </div>
+    </section>
+
+    <aside class="panel side">
+      <h3>Fordeling på kategorier</h3>
+      <div class="catList" id="catList"></div>
+      <div class="legend">
+        <span class="tag status-Aktiv"><span class="dot"></span>Aktiv</span>
+        <span class="tag status-Undersøg"><span class="dot"></span>Undersøg</span>
+        <span class="tag status-Opsig"><span class="dot"></span>Opsig</span>
+      </div>
+    </aside>
+  </div>
+
+  <div class="calcBar">
+    <div class="calcLeft">
+      <div class="calcBadge">Σ</div>
+      <div>
+        <div class="calcTitle">Hurtig beregning</div>
+        <div class="calcSub" id="calcSub">Vælg licenser i listen for at se samlet årspris</div>
+      </div>
+    </div>
+    <div class="calcActions">
+      <button id="clearCalc">Ryd valg</button>
+    </div>
+    <div class="calcTotal">
+      <div class="label">Valgte licenser / år</div>
+      <div class="value" id="calcTotal">0 kr.</div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modalBg" id="backupModalBg">
+  <div class="modal">
+    <h2>Backup af IT-register</h2>
+    <p class="small" style="margin-top:-6px;margin-bottom:14px">
+      Her kan du enten hente backupfilen eller kopiere data manuelt.
+    </p>
+    <div class="field full">
+      <label>Backup-data</label>
+      <textarea id="backupJson" style="min-height:260px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px"></textarea>
+    </div>
+    <div class="modalActions">
+      <button id="backupClose">Luk</button>
+      <button id="backupCopy">Kopiér JSON</button>
+      <button id="backupOpen">Åbn backup i ny fane</button>
+      <button class="primary" id="backupDownload">Download backup</button>
+    </div>
+    <div class="small" id="backupMessage" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<div class="modalBg" id="detailModalBg">
+  <div class="modal">
+    <div class="field full" style="margin-bottom:14px">
+      <label>Systemnavn</label>
+      <input id="detailName" style="font-size:24px;font-weight:850;letter-spacing:-.02em">
+    </div>
+
+    <div class="form">
+      <div class="field">
+        <label>Kategori</label>
+        <input id="detailCategoryInput" placeholder="Fx Website & webshop">
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <div id="detailStatusDD"></div>
+      </div>
+
+      <div class="field">
+        <label>Pris pr. måned (kr.)</label>
+        <input id="detailMonthlyPrice" inputmode="decimal" placeholder="Fx 299">
+      </div>
+      <div class="field">
+        <label>Pris pr. år (kr.)</label>
+        <input id="detailAnnualPrice" inputmode="decimal" placeholder="Beregnes automatisk">
+        <div class="small" id="annualHint" style="margin-top:5px">Skriv månedspris, så beregnes årsprisen automatisk.</div>
+      </div>
+
+      <div class="field full">
+        <label>Hvad bruges systemet/licensen til?</label>
+        <textarea id="detailPurpose"></textarea>
+      </div>
+
+      <div class="field full">
+        <label>Note</label>
+        <textarea id="detailNote" placeholder="Fx login-ejer, betalingsforhold, særlige forhold, opsigelse osv."></textarea>
+      </div>
+    </div>
+
+    <div class="modalActions">
+      <button id="detailCancel">Luk</button>
+      <button class="primary" id="detailSave">Gem ændringer</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalBg" id="modalBg">
+  <div class="modal">
+    <h2>Tilføj nyt system</h2>
+    <div class="form">
+      <div class="field full"><label>Systemnavn</label><input id="mName"></div>
+      <div class="field"><label>Kategori</label><input id="mCat" placeholder="Fx Kommunikation"></div>
+      <div class="field"><label>Status</label><select id="mStatus"><option>Aktiv</option><option>Undersøg</option><option>Opsig</option></select></div>
+      <div class="field full"><label>Formål</label><input id="mPurpose"></div>
+      <div class="field"><label>Pris pr. måned (kr.)</label><input id="mMonthlyPrice" inputmode="decimal"></div>
+      <div class="field"><label>Pris pr. år (kr.)</label><input id="mPrice" inputmode="decimal"></div>
+      <div class="field full"><label>Note</label><textarea id="mNote"></textarea></div>
+    </div>
+    <div class="modalActions"><button id="cancel">Annuller</button><button class="primary" id="save">Gem system</button></div>
+  </div>
+</div>
+
+<script>
+
+const ACCESS_PASSWORD = "Mikaelersej";
+const ACCESS_KEY = "lykkeliga_it_register_access";
+
+function unlockApp(){
+  sessionStorage.setItem(ACCESS_KEY,"1");
+  const gate=document.getElementById("accessGate");
+  if(gate) gate.classList.add("hidden");
+}
+function checkAccess(){
+  if(sessionStorage.getItem(ACCESS_KEY)==="1"){
+    const gate=document.getElementById("accessGate");
+    if(gate) gate.classList.add("hidden");
+  }
+}
+document.addEventListener("DOMContentLoaded",()=>{
+  checkAccess();
+  const input=document.getElementById("gatePassword");
+  const btn=document.getElementById("gateLogin");
+  const err=document.getElementById("gateError");
+  const submit=()=>{
+    if(input.value===ACCESS_PASSWORD){
+      err.textContent="";
+      unlockApp();
+    }else{
+      err.textContent="Forkert adgangskode.";
+      input.select();
+    }
+  };
+  btn.addEventListener("click",submit);
+  input.addEventListener("keydown",e=>{if(e.key==="Enter")submit()});
+});
+
+const BASE = [{"name": "Google Workspace", "category": "Kontor & samarbejde", "purpose": "Mail, filer, dokumenter, regneark, chat og øvrige Google-værktøjer", "price": "3270", "note": "Omfatter Gmail, Drive, Docs, Sheets, Chat m.m.", "status": "Aktiv", "id": "4b3447da-a877-4326-af67-d0c89ff7bf78", "monthlyPrice": ""}, {"name": "WordPress", "category": "Website & webshop", "purpose": "CMS til LykkeLiga.dk", "price": "", "note": "Nuværende website-platform", "status": "Aktiv", "id": "d198d3fc-c9ca-4765-9c97-bf31a83e15e1"}, {"name": "Weltklasse", "category": "Website & webshop", "purpose": "Hosting/drift af LykkeLiga.dk", "price": "", "note": "Ønske om senere at flytte til hosting, LykkeLiga selv styrer", "status": "Undersøg", "id": "8f2261c6-95f8-4d42-a12a-d285cf64a092"}, {"name": "Curanet", "category": "Website & webshop", "purpose": "Hosting-infrastruktur/reseller bag Weltklasse", "price": "", "note": "Skal verificeres", "status": "Undersøg", "id": "6aa8af34-7e1d-4aa8-be3b-00b2b7189f7f"}, {"name": "Divi", "category": "Website & webshop", "purpose": "WordPress page builder/design", "price": "", "note": "Vores Divi licens er betalt gennem udviklingen i samarbejde med Weltklasse. Bortfalder formentlig hvis vi skifter leverandør)", "status": "Aktiv", "id": "d8a1f81d-97b1-4dff-9dff-dbbc64ab311d"}, {"name": "The Events Calendar", "category": "Website & webshop", "purpose": "Kalender og events", "price": "975", "note": "", "status": "Aktiv", "id": "82f7637f-021f-438b-92a0-a7c0a4e39672"}, {"name": "Event Tickets", "category": "Website & webshop", "purpose": "Billetter og tilmeldinger", "price": "975", "note": "Del af The Events Calendar-økosystemet", "status": "Aktiv", "id": "1bcf898d-05f9-4087-ac9d-a0c7a554c264"}, {"name": "WooCommerce", "category": "Website & webshop", "purpose": "Webshop og betalingsflow", "price": "", "note": "", "status": "Aktiv", "id": "ef41ce52-390c-4c79-9f54-69655102ee55"}, {"name": "QuickPay", "category": "Website & webshop", "purpose": "Payment gateway", "price": "1188", "note": "", "status": "Aktiv", "id": "e13da6c5-89e6-4bb3-b7b5-49e09f62388a"}, {"name": "Clearhaus", "category": "Website & webshop", "purpose": "Kortindløser", "price": "", "note": "", "status": "Aktiv", "id": "aae645f4-e522-4a10-821b-237c1a8f62ad"}, {"name": "Simply.com", "category": "Domæner & DNS", "purpose": "Domæner og DNS", "price": "", "note": "LykkeLiga-konto. Bl.a. LykkeCup, HappyLeague m.fl.", "status": "Aktiv", "id": "38f434b1-5dc7-4cff-a6db-834ea36ec4b4"}, {"name": "Cursor", "category": "Udvikling & hosting", "purpose": "AI-assisteret udvikling", "price": "1571", "note": "Betalt version", "status": "Aktiv", "id": "0cc8fd71-b67a-42b0-8eeb-a79d9f154a11"}, {"name": "GitHub", "category": "Udvikling & hosting", "purpose": "Kode, repositories og versionsstyring", "price": "", "note": "", "status": "Aktiv", "id": "c126b1f0-674f-4d48-848d-33b9e4f47b8a"}, {"name": "Vercel", "category": "Udvikling & hosting", "purpose": "Hosting og deployment af egenudviklede webapps", "price": "1964", "note": "Vercel Pro", "status": "Aktiv", "id": "e3969959-5f1e-4940-b1b3-f62066626e58"}, {"name": "Supabase", "category": "Udvikling & hosting", "purpose": "Database og backend", "price": "2749", "note": "", "status": "Aktiv", "id": "06babac6-4128-4a5e-bf71-796aee24ef25"}, {"name": "Resend", "category": "Udvikling & hosting", "purpose": "Transaktionelle mails fra webapps", "price": "", "note": "", "status": "Aktiv", "id": "f13ee187-5e69-4e84-a371-59c761f8841b"}, {"name": "LykkeCup-platformen", "category": "Egenudviklede systemer", "purpose": "Mobil webapp + backend til afvikling af LykkeCup", "price": "0", "note": "Turneringsplan m.m.", "status": "Aktiv", "id": "6fd92560-7fa5-48a5-b055-71aa47c3ae70"}, {"name": "LykkeLiga Jukebox", "category": "Egenudviklede systemer", "purpose": "Mobil webapp/PWA med LykkeLiga-sange", "price": "0", "note": "", "status": "Aktiv", "id": "9020d317-a767-4a66-b23b-d7e227a186b2"}, {"name": "business.lykkeliga.dk / Legekammerater", "category": "Egenudviklede systemer", "purpose": "Site til partnerskaber og salg", "price": "0", "note": "Udviklet i Cursor, GitHub/Vercel, bruger Resend", "status": "Aktiv", "id": "999b63fd-7c65-4ead-9e70-b3cf5e4ba823"}, {"name": "LykkeCup QR-scanner", "category": "Egenudviklede systemer", "purpose": "QR-scanning af billetter", "price": "0", "note": "Bygget internt som backup/erstatning ved LykkeCup", "status": "Aktiv", "id": "b9edb45a-996f-4621-bc04-ff81dd6f3be5"}, {"name": "Airtable", "category": "Data & CRM", "purpose": "Opbevaring og visualisering af klub-, spiller- og øvrige data", "price": "", "note": "Sandsynligvis gratis version – skal tjekkes", "status": "Undersøg", "id": "268f4b3b-58db-442b-8046-5845a8f98eba"}, {"name": "Adobe Creative Cloud", "category": "Foto, video & kreativt", "purpose": "Photoshop, Illustrator, Premiere Pro, After Effects m.m.", "price": "3600", "note": "Årslicens med NGO-rabat - 1 licens (Mikael)", "status": "Aktiv", "id": "0776d2f3-58f3-4e73-8283-d7f427635ec0", "monthlyPrice": "300"}, {"name": "Frame.io", "category": "Foto, video & kreativt", "purpose": "Video-review, godkendelse og deling", "price": "1464", "note": "", "status": "Aktiv", "id": "cc716008-c40d-4777-aeb7-61cc1c81d299"}, {"name": "MUX", "category": "Foto, video & kreativt", "purpose": "Videohosting/streaming på websites", "price": "", "note": "", "status": "Aktiv", "id": "ef5ac872-34b7-4e91-952e-2bca9f95ba6f"}, {"name": "SmugMug", "category": "Foto, video & kreativt", "purpose": "Fotoarkiv og deling", "price": "903", "note": "Ca. 9 års fotoarkiv, bl.a. fra LykkeCup", "status": "Aktiv", "id": "6264e5ad-d86d-4b2f-9b41-a07c892753fc"}, {"name": "Canva for Nonprofits", "category": "Foto, video & kreativt", "purpose": "Grafik, templates og brand kits", "price": "0", "note": "NGO Pro", "status": "Aktiv", "id": "ff3379df-7a4b-4bd5-83af-c4aedfd46282"}, {"name": "Kittl", "category": "Foto, video & kreativt", "purpose": "AI/designværktøj", "price": "1178", "note": "Årslicens; forventes ikke fornyet. Testes til bl.a. nemme og hurtige mockups og design.", "status": "Opsig", "id": "2202e96e-0713-4e3a-826e-63aa152c0d3c", "monthlyPrice": ""}, {"name": "Envato Elements", "category": "Foto, video & kreativt", "purpose": "Musik, SFX, templates og After Effects-assets", "price": "1296", "note": "Årslicens", "status": "Aktiv", "id": "0b980773-040b-42e3-9981-d006c3735145"}, {"name": "ChatGPT", "category": "AI & musik", "purpose": "AI, tekst, analyse, udvikling og idéarbejde", "price": "3142", "note": "2 stk pro konti (Mikael & Signe)", "status": "Undersøg", "id": "077762b1-9cf4-4015-83b8-3bd2b49c0e21"}, {"name": "Suno", "category": "AI & musik", "purpose": "AI-musikproduktion", "price": "1885,5", "note": "Stor/betalt årslicens udløber 12. dec. Indkøbt i forbindelse med AI musik projekt", "status": "Aktiv", "id": "2529bf22-77d7-4835-849c-60e211664f22", "monthlyPrice": ""}, {"name": "BandLab", "category": "AI & musik", "purpose": "Online DAW/musikproduktion", "price": "648", "note": "Plan skal undersøges - indkøbt i forbindelse med AI musikprojekt. Opsagt per 20. nov 2026", "status": "Undersøg", "id": "cf46d38e-9dd7-4bfb-add7-52928c65eaf2", "monthlyPrice": ""}, {"name": "Jotform", "category": "Formularer & undersøgelser", "purpose": "Spørgeskemaer og formularer", "price": "", "note": "", "status": "Aktiv", "id": "788ed355-703d-4c2f-a5de-4e28cc1e608e"}, {"name": "HeyLoyalty", "category": "Nyhedsbrev", "purpose": "Nyhedsbreve og modtagerlister", "price": "8580", "note": "", "status": "Aktiv", "id": "93790d70-19fa-4a59-a1bb-db34b9338142", "monthlyPrice": "715"}, {"name": "OnlineFundraising", "category": "Fundraising & betaling", "purpose": "Donationer, fanklub og tilbagevendende betalinger", "price": "11760", "note": "", "status": "Aktiv", "id": "d27170ff-c19b-448a-b2f4-1be5c671e41a", "monthlyPrice": "980"}, {"name": "Trello", "category": "Projektstyring", "purpose": "Projekt- og opgavestyring", "price": "", "note": "Bruges ad hoc", "status": "Aktiv", "id": "4d5bfa4a-b0c6-4e2e-a8ad-d070aeb86aa2"}, {"name": "OptiSigns", "category": "Digital signage", "purpose": "Digital skiltning til bl.a. LykkeCup og skærme", "price": "4485", "note": "Ca. 4 skærme/licenser; hardware skal optælles", "status": "Aktiv", "id": "4540509d-bd90-4dd7-9c56-a44d5744a1be"}, {"name": "Intempus", "category": "Administration", "purpose": "Timeregistrering", "price": "", "note": "Nyt system", "status": "Aktiv", "id": "1a6733dd-fac2-4e82-90d0-a79dd2c9bd84"}];
+const KEY = "lykkeliga_it_register_warroom_v2";
+let data = JSON.parse(localStorage.getItem(KEY)||"null") || BASE.map((x,i)=>({...x,id:(crypto.randomUUID?crypto.randomUUID():String(Date.now()+i))}));
+
+// Migration: Google apps are part of Google Workspace, not separate register entries.
+const GOOGLE_CHILDREN = new Set(["Gmail","Google Drive","Google Docs","Google Sheets","Google Chat"]);
+data = data.filter(x => !GOOGLE_CHILDREN.has(x.name));
+
+// Ensure Google Workspace exists and has the consolidated description.
+let workspace = data.find(x => x.name === "Google Workspace");
+if (!workspace) {
+  workspace = {...BASE.find(x=>x.name==="Google Workspace"), id:(crypto.randomUUID?crypto.randomUUID():String(Date.now()))};
+  data.unshift(workspace);
+}
+workspace.purpose = "Mail, filer, dokumenter, regneark, chat og øvrige Google-værktøjer";
+workspace.note = workspace.note || "Samlet Google Workspace-licens. Bruges bl.a. til Gmail, Google Drive, Docs, Sheets, Chat og øvrige Google Workspace-værktøjer.";
+localStorage.setItem(KEY, JSON.stringify(data));
+let selectedCategory = "";
+let selectedStatus = "";
+let detailEditingId = null;
+let selectedForCalc = new Set();
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+const num=v=>{let n=Number(String(v??"").replace(/\./g,"").replace(",","."));return Number.isFinite(n)?n:0};
+const money=n=>new Intl.NumberFormat("da-DK",{maximumFractionDigits:0}).format(n)+" kr.";
+function persist(){localStorage.setItem(KEY,JSON.stringify(data));stats();catsSide()}
+function dropdownMarkup(id, label, options, selected, row=false){
+ const cls=row?"dd rowDD":"dd";
+ return `<div class="${cls}" data-dd="${id}">
+   <button class="ddBtn" type="button">
+     <span class="${row?'statusPill':''}">${row?`<span class="dot"></span>`:""}<span class="ddLabel">${esc(selected||label)}</span></span>
+     <span class="ddChevron"></span>
+   </button>
+   <div class="ddMenu">
+     ${options.map(o=>`<button class="ddOption ${o.value===selected?'selected':''}" type="button" data-value="${esc(o.value)}"><span class="check">${o.value===selected?'✓':''}</span>${esc(o.label)}</button>`).join("")}
+   </div>
+ </div>`;
+}
+function bindDropdown(root, onChange){
+ const dd=root.querySelector(".dd"); if(!dd) return;
+ const btn=dd.querySelector(".ddBtn");
+ btn.onclick=e=>{e.stopPropagation(); document.querySelectorAll(".dd.open").forEach(x=>{if(x!==dd)x.classList.remove("open")}); dd.classList.toggle("open")};
+ dd.querySelectorAll(".ddOption").forEach(opt=>opt.onclick=e=>{
+   e.stopPropagation(); onChange(opt.dataset.value); dd.classList.remove("open");
+ });
+}
+function categories(){
+ const cs=[...new Set(data.map(x=>x.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"da"));
+ $("catDD").innerHTML=dropdownMarkup("cat","Alle kategorier",[{value:"",label:"Alle kategorier"},...cs.map(c=>({value:c,label:c}))],selectedCategory);
+ bindDropdown($("catDD"),v=>{selectedCategory=v;categories();render()});
+ $("statusDD").innerHTML=dropdownMarkup("status","Alle statusser",[
+   {value:"",label:"Alle statusser"},{value:"Aktiv",label:"Aktiv"},{value:"Undersøg",label:"Undersøg"},{value:"Opsig",label:"Opsig"}
+ ],selectedStatus);
+ bindDropdown($("statusDD"),v=>{selectedStatus=v;categories();render()});
+}
+function stats(){
+ const priced=data.filter(x=>String(x.price).trim()!=="");
+ const total=data.reduce((s,x)=>s+num(x.price),0);
+ $("total").textContent=money(total); $("systems").textContent=data.length;
+ $("missing").textContent=data.length-priced.length;
+ $("investigate").textContent=data.filter(x=>x.status==="Undersøg").length;
+ $("coverage").textContent=`${priced.length} af ${data.length} systemer har en pris`;
+ $("coverageBar").style.width=(data.length?priced.length/data.length*100:0)+"%";
+}
+function catsSide(){
+ const counts={}; data.forEach(x=>counts[x.category]=(counts[x.category]||0)+1);
+ const max=Math.max(1,...Object.values(counts));
+ $("catList").innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`
+ <div class="catRow"><div class="catName">${esc(k)}</div><div class="small">${v}</div><div class="catBar"><div style="width:${v/max*100}%"></div></div></div>`).join("");
+}
+
+function updateCalculator(){
+ const picked=data.filter(x=>selectedForCalc.has(x.id));
+ const total=picked.reduce((sum,x)=>sum+num(x.price),0);
+ $("calcTotal").textContent=money(total);
+ const missing=picked.filter(x=>String(x.price).trim()==="").length;
+ $("calcSub").textContent=picked.length
+   ? `${picked.length} valgte licenser${missing?` · ${missing} uden registreret pris`:""}`
+   : "Vælg licenser i listen for at se samlet årspris";
+ const all=$("selectAll");
+ if(all){
+   const visible=[...document.querySelectorAll(".pickSystem")];
+   all.checked=visible.length>0 && visible.every(cb=>cb.checked);
+   all.indeterminate=visible.some(cb=>cb.checked) && !all.checked;
+ }
+}
+
+function render(){
+ const q=$("search").value.toLowerCase().trim(), c=selectedCategory, st=selectedStatus;
+ const rows=data.filter(x=>(!q||`${x.name} ${x.category} ${x.purpose} ${x.note}`.toLowerCase().includes(q))&&(!c||x.category===c)&&(!st||x.status===st));
+ $("body").innerHTML=rows.map(x=>`
+ <tr data-id="${x.id}">
+  <td><input type="checkbox" class="pickBox pickSystem" data-pick-id="${x.id}" ${selectedForCalc.has(x.id)?"checked":""}></td>
+  <td class="name">${esc(x.name)}</td>
+  <td><span class="tag">${esc(x.category)}</span></td>
+  <td><div class="rowStatus" data-status-id="${x.id}"></div></td>
+  <td><input class="inline price" data-field="price" value="${esc(x.price)}" placeholder="0"></td>
+  <td>
+    <button class="infoBtn" data-info-id="${x.id}"><span class="i">i</span><span>Se / redigér</span></button>
+    <div class="notePreview">${esc(x.note || x.purpose || "Ingen note endnu")}</div>
+  </td>
+  <td><button class="del" title="Slet">✕</button></td>
+ </tr>`).join("");
+ $("empty").style.display=rows.length?"none":"block";
+ $("body").querySelectorAll("[data-field]").forEach(el=>el.addEventListener("input",e=>{
+   const item=data.find(x=>x.id===e.target.closest("tr").dataset.id);
+   item[e.target.dataset.field]=e.target.value; persist(); updateCalculator();
+ }));
+ $("body").querySelectorAll(".pickSystem").forEach(cb=>cb.addEventListener("change",e=>{
+   const id=e.target.dataset.pickId;
+   if(e.target.checked) selectedForCalc.add(id); else selectedForCalc.delete(id);
+   updateCalculator();
+ }));
+ $("body").querySelectorAll(".rowStatus").forEach(root=>{
+   const id=root.dataset.statusId, item=data.find(x=>x.id===id);
+   root.innerHTML=dropdownMarkup("row-"+id,"Status",[
+     {value:"Aktiv",label:"Aktiv"},{value:"Undersøg",label:"Undersøg"},{value:"Opsig",label:"Opsig"}
+   ],item.status,true);
+   const dd=root.querySelector(".dd");
+   dd.classList.add("status-"+item.status);
+   bindDropdown(root,v=>{item.status=v;persist();render()});
+ });
+ $("body").querySelectorAll(".infoBtn").forEach(b=>b.onclick=e=>{
+   const id=e.currentTarget.dataset.infoId, item=data.find(x=>x.id===id);
+   detailEditingId=id;
+   $("detailName").value=item.name||"";
+   $("detailCategoryInput").value=item.category||"";
+   $("detailMonthlyPrice").value=item.monthlyPrice||"";
+   $("detailAnnualPrice").value=item.price||"";
+   $("detailPurpose").value=item.purpose||"";
+   $("detailNote").value=item.note||"";
+
+   $("detailStatusDD").innerHTML=dropdownMarkup("detail-status","Status",[
+     {value:"Aktiv",label:"Aktiv"},
+     {value:"Undersøg",label:"Undersøg"},
+     {value:"Opsig",label:"Opsig"}
+   ],item.status||"Aktiv");
+   const renderDetailStatus=(value)=>{
+     item.__draftStatus=value;
+     $("detailStatusDD").innerHTML=dropdownMarkup("detail-status","Status",[
+       {value:"Aktiv",label:"Aktiv"},
+       {value:"Undersøg",label:"Undersøg"},
+       {value:"Opsig",label:"Opsig"}
+     ],value);
+     bindDropdown($("detailStatusDD"),renderDetailStatus);
+   };
+   renderDetailStatus(item.status||"Aktiv");
+
+   $("detailModalBg").classList.add("open");
+ });
+
+ stats();catsSide();updateCalculator();
+}
+function openModal(){["mName","mCat","mPurpose","mMonthlyPrice","mPrice","mNote"].forEach(i=>$(i).value="");$("mStatus").value="Aktiv";$("modalBg").classList.add("open");setTimeout(()=>$("mName").focus(),50)}
+function closeModal(){$("modalBg").classList.remove("open")}
+function closeDetail(){ $("detailModalBg").classList.remove("open"); detailEditingId=null; }
+$("detailCancel").onclick=closeDetail;
+
+$("detailMonthlyPrice").addEventListener("input",()=>{
+  const raw=$("detailMonthlyPrice").value.trim();
+  if(raw===""){
+    $("annualHint").textContent="Skriv månedspris, så beregnes årsprisen automatisk.";
+    return;
+  }
+  const monthly=num(raw);
+  if(monthly>0 || raw==="0"){
+    const annual=Math.round(monthly*12*100)/100;
+    $("detailAnnualPrice").value=String(annual).replace(".",",");
+    $("annualHint").textContent=`${money(monthly)} / md. = ${money(annual)} / år`;
+  }
+});
+$("detailModalBg").onclick=e=>{if(e.target===$("detailModalBg"))closeDetail()};
+$("detailSave").onclick=()=>{
+ const item=data.find(x=>x.id===detailEditingId); if(!item) return closeDetail();
+ item.name=$("detailName").value.trim() || item.name;
+ item.category=$("detailCategoryInput").value.trim() || "Andet";
+ item.status=item.__draftStatus || item.status || "Aktiv";
+ item.monthlyPrice=$("detailMonthlyPrice").value.trim();
+ item.price=$("detailAnnualPrice").value.trim();
+ item.purpose=$("detailPurpose").value.trim();
+ item.note=$("detailNote").value.trim();
+ delete item.__draftStatus;
+ persist(); categories(); render(); closeDetail();
+};
+$("add").onclick=openModal;$("cancel").onclick=closeModal;
+$("mMonthlyPrice").addEventListener("input",()=>{
+ const raw=$("mMonthlyPrice").value.trim();
+ if(raw!==""){
+   const monthly=num(raw);
+   if(monthly>0 || raw==="0"){
+     $("mPrice").value=String(Math.round(monthly*12*100)/100).replace(".",",");
+   }
+ }
+});
+$("modalBg").onclick=e=>{if(e.target===$("modalBg"))closeModal()};
+$("save").onclick=()=>{
+ const name=$("mName").value.trim(); if(!name)return alert("Skriv et systemnavn.");
+ data.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,category:$("mCat").value.trim()||"Andet",purpose:$("mPurpose").value.trim(),monthlyPrice:$("mMonthlyPrice").value.trim(),price:$("mPrice").value.trim(),note:$("mNote").value.trim(),status:$("mStatus").value});
+ persist();categories();render();closeModal();
+};
+$("search").oninput=render;
+$("selectAll").addEventListener("change",e=>{
+ document.querySelectorAll(".pickSystem").forEach(cb=>{
+   cb.checked=e.target.checked;
+   const id=cb.dataset.pickId;
+   if(e.target.checked) selectedForCalc.add(id); else selectedForCalc.delete(id);
+ });
+ updateCalculator();
+});
+$("clearCalc").onclick=()=>{
+ selectedForCalc.clear();
+ document.querySelectorAll(".pickSystem").forEach(cb=>cb.checked=false);
+ updateCalculator();
+};
+
+// Robust delete handler: works for all rows, including rows created after render.
+$("body").addEventListener("click", e=>{
+  const btn=e.target.closest(".del");
+  if(!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const tr=btn.closest("tr");
+  if(!tr) return;
+  const id=tr.dataset.id;
+  const item=data.find(x=>x.id===id);
+  if(!item) return;
+  if(confirm(`Slet "${item.name}" fra IT-registeret?`)){
+    data=data.filter(x=>x.id!==id);
+    persist();
+    categories();
+    render();
+  }
+});
+document.addEventListener("click",()=>document.querySelectorAll(".dd.open").forEach(x=>x.classList.remove("open")));
+function getBackupJson(){
+  return JSON.stringify(data,null,2);
+}
+function downloadBackup(){
+  const json=getBackupJson();
+
+  // Brug data-URL i stedet for blob-URL. Det virker bedre i indlejrede/sandboxede previews.
+  const dataUrl="data:application/json;charset=utf-8,"+encodeURIComponent(json);
+  const a=document.createElement("a");
+  a.href=dataUrl;
+  a.download="lykkeliga-it-register-backup.json";
+  a.target="_blank";
+  a.rel="noopener";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  $("backupMessage").textContent="Hvis filen ikke bliver hentet automatisk, brug 'Åbn backup i ny fane' eller 'Kopiér JSON'.";
+}
+$("export").onclick=()=>{
+  $("backupJson").value=getBackupJson();
+  $("backupMessage").textContent="";
+  $("backupModalBg").classList.add("open");
+};
+$("backupClose").onclick=()=>$("backupModalBg").classList.remove("open");
+$("backupModalBg").onclick=e=>{if(e.target===$("backupModalBg"))$("backupModalBg").classList.remove("open")};
+$("backupDownload").onclick=downloadBackup;
+$("backupOpen").onclick=()=>{
+  const json=getBackupJson();
+  const dataUrl="data:application/json;charset=utf-8,"+encodeURIComponent(json);
+  const w=window.open(dataUrl,"_blank","noopener");
+  if(!w){
+    $("backupMessage").textContent="Browseren blokerede den nye fane. Brug 'Kopiér JSON'.";
+  }else{
+    $("backupMessage").textContent="Backup er åbnet i en ny fane. Gem siden derfra som fil.";
+  }
+};
+$("backupCopy").onclick=async()=>{
+  const json=getBackupJson();
+  $("backupJson").value=json;
+  try{
+    await navigator.clipboard.writeText(json);
+    $("backupMessage").textContent="Backup-data er kopieret til udklipsholderen.";
+  }catch(e){
+    $("backupJson").focus();
+    $("backupJson").select();
+    document.execCommand("copy");
+    $("backupMessage").textContent="Backup-data er markeret/kopieret. Hvis det ikke virkede, tryk Cmd+C.";
+  }
+};
+categories();render();
+</script>
+</body>
+</html>
