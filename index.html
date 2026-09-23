@@ -54,7 +54,15 @@ tr:hover td{background:#171a1e}
 .inline{width:100%;background:#101215;border:1px solid transparent;color:var(--text);border-radius:8px;padding:8px 9px}
 .inline:hover,.inline:focus{border-color:#3a4048;outline:none}.price{width:105px}
 .del{padding:7px 9px;color:#aaa;background:transparent}.del:hover{color:var(--red)}
-.side{padding:18px}
+.side{padding:18px;display:flex;flex-direction:column}
+.catViewNote{margin:12px 0 0;line-height:1.5}
+.catPages{display:flex;justify-content:center;gap:2px;margin-top:auto;padding-top:18px}
+.catPage{display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;background:transparent;border-radius:50%}
+.catPage::before{content:"";width:7px;height:7px;border-radius:50%;background:#646b76}
+.catPage[aria-pressed="true"]::before{background:var(--yellow)}
+.catPage:hover{background:#24282e}
+.catPage:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.catAmount{white-space:nowrap;font-variant-numeric:tabular-nums}
 .side h3{margin:0 0 14px;font-size:15px;font-weight:400}
 .catList{display:flex;flex-direction:column;gap:9px}
 .catRow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}
@@ -242,12 +250,17 @@ textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-cont
     </section>
 
     <aside class="panel side">
-      <h3>Fordeling på kategorier</h3>
-      <div class="catList" id="catList"></div>
+      <h3 id="catTitle">Fordeling på kategorier</h3>
+      <div class="catList" id="catList" aria-labelledby="catTitle"></div>
+      <p class="small catViewNote" id="catViewNote" hidden></p>
       <div class="legend">
         <span class="tag status-Aktiv"><span class="dot"></span>Aktiv</span>
         <span class="tag status-Undersøg"><span class="dot"></span>Undersøg</span>
         <span class="tag status-Opsig"><span class="dot"></span>Opsig</span>
+      </div>
+      <div class="catPages" role="group" aria-label="Vælg kategorivisning">
+        <button class="catPage" type="button" id="catCountView" aria-label="Fordeling på kategorier" title="Fordeling på kategorier" aria-controls="catList" aria-pressed="true"></button>
+        <button class="catPage" type="button" id="catPriceView" aria-label="Pris per kategori" title="Pris per kategori" aria-controls="catList" aria-pressed="false"></button>
       </div>
     </aside>
   </div>
@@ -452,12 +465,41 @@ function stats(){
  $("coverage").textContent=`${priced.length} af ${data.length} systemer har en pris`;
  $("coverageBar").style.width=(data.length?priced.length/data.length*100:0)+"%";
 }
+let categoryView = "count";
 function catsSide(){
- const counts={}; data.forEach(x=>counts[x.category]=(counts[x.category]||0)+1);
- const max=Math.max(1,...Object.values(counts));
- $("catList").innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`
- <div class="catRow"><div class="catName">${esc(k)}</div><div class="small">${v}</div><div class="catBar"><div style="width:${v/max*100}%"></div></div></div>`).join("");
+ const prices = categoryView === "price";
+ const groups = new Map();
+ let missing = 0;
+ data.forEach(x=>{
+   const category = x.category || "Andet";
+   const group = groups.get(category) || {count:0,total:0,known:0};
+   group.count++;
+   if(String(x.price ?? "").trim() !== ""){
+     group.total += num(x.price);
+     group.known++;
+   }else{
+     missing++;
+   }
+   groups.set(category,group);
+ });
+ const entries = [...groups.entries()].sort((a,b)=>{
+   if(prices && Boolean(a[1].known) !== Boolean(b[1].known)) return a[1].known ? -1 : 1;
+   return (prices ? b[1].total-a[1].total : b[1].count-a[1].count) || a[0].localeCompare(b[0],"da");
+ });
+ const max = Math.max(1,...entries.map(([,g])=>prices ? g.total : g.count));
+ $("catTitle").textContent = prices ? "Pris per kategori" : "Fordeling på kategorier";
+ $("catCountView").setAttribute("aria-pressed",String(!prices));
+ $("catPriceView").setAttribute("aria-pressed",String(prices));
+ $("catViewNote").hidden = !prices;
+ $("catViewNote").textContent = "Kendte årlige udgifter." + (missing ? ` ${missing} systemer mangler pris og indgår ikke i beløbene.` : "");
+ $("catList").innerHTML=entries.map(([k,g])=>{
+   const value = prices ? g.total : g.count;
+   const label = prices ? (g.known ? money(value) : "Ukendt") : String(value);
+   return `<div class="catRow"><div class="catName" title="${esc(k)}">${esc(k)}</div><div class="small catAmount">${label}</div><div class="catBar"><div style="width:${Math.max(0,value)/max*100}%"></div></div></div>`;
+ }).join("") || '<div class="small">Ingen kategorier endnu.</div>';
 }
+$("catCountView").onclick=()=>{categoryView="count";catsSide()};
+$("catPriceView").onclick=()=>{categoryView="price";catsSide()};
 
 function updateCalculator(){
  const picked=data.filter(x=>selectedForCalc.has(x.id));
