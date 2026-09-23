@@ -13,49 +13,49 @@
 *{box-sizing:border-box} html{color-scheme:dark}
 body{margin:0;background:
  radial-gradient(circle at 90% 0%, rgba(255,216,77,.08), transparent 28rem),
- var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+ var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;line-height:1.5}
 button,input,select,textarea{font:inherit}
 .shell{max-width:1500px;margin:auto;padding:28px}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:30px}
 .brand{display:flex;align-items:center;gap:14px}
-.mark{width:44px;height:44px;border-radius:14px;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:950;font-size:17px}
-.eyebrow{color:var(--yellow);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-h1{font-size:34px;line-height:1.1;margin:3px 0 0;letter-spacing:-.035em}
+.mark{width:44px;height:44px;border-radius:14px;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:400;font-size:17px}
+.eyebrow{color:var(--yellow);font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:32px;font-weight:400;line-height:1.2;margin:3px 0 0;letter-spacing:-.035em}
 .actions{display:flex;gap:10px;flex-wrap:wrap}
-button{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:11px;padding:10px 14px;font-weight:750;cursor:pointer}
+button{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:11px;padding:10px 14px;font-weight:400;cursor:pointer}
 button:hover{border-color:#454b54}
 button.primary{background:var(--yellow);border-color:var(--yellow);color:#111}
 .dashboard{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:13px;margin-bottom:15px}
 .hero,.metric{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel2),var(--panel));padding:20px}
 .hero{min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
-.heroLabel,.metricLabel{color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.11em;font-weight:800}
-.heroValue{font-size:44px;font-weight:900;letter-spacing:-.05em;margin-top:12px}
+.heroLabel,.metricLabel{color:var(--muted);font-size:12px;letter-spacing:.02em;font-weight:400}
+.heroValue{font-size:44px;font-weight:400;letter-spacing:-.05em;margin-top:12px}
 .heroMeta{color:var(--muted);font-size:13px;margin-top:8px}
-.metricValue{font-size:31px;font-weight:900;letter-spacing:-.04em;margin-top:18px}
+.metricValue{font-size:31px;font-weight:400;letter-spacing:-.04em;margin-top:18px}
 .metricSub{color:var(--muted);font-size:12px;margin-top:7px}
 .progress{height:7px;border-radius:999px;background:#292c31;overflow:hidden;margin-top:14px}
 .progress>div{height:100%;background:var(--yellow);border-radius:999px}
 .grid2{display:grid;grid-template-columns:1fr 340px;gap:15px}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .panelHead{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 18px;border-bottom:1px solid var(--line)}
-.panelTitle{font-weight:850;font-size:15px}
+.panelTitle{font-weight:400;font-size:15px}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .search,.select{border:1px solid var(--line);background:#101215;color:var(--text);border-radius:10px;padding:9px 11px;outline:none}
 .search{width:270px}.select{min-width:155px}
 .tableWrap{overflow:auto;max-height:680px}
 table{width:100%;min-width:1000px;border-collapse:collapse}
-th{position:sticky;top:0;z-index:2;background:#121417;color:#737985;font-size:10px;text-transform:uppercase;letter-spacing:.09em;text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{position:sticky;top:0;z-index:2;background:#121417;color:#9ba2ae;font-size:12px;font-weight:400;letter-spacing:.01em;text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
 td{padding:12px 14px;border-bottom:1px solid #23272c;vertical-align:middle}
 tr:hover td{background:#171a1e}
-.name{font-weight:820}.purpose{color:#b8bdc6;font-size:13px}
-.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800;background:#23272d;color:#c9ced6}
+.name{font-weight:400}.purpose{color:#b8bdc6;font-size:13px}
+.tag{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:400;background:#23272d;color:#c9ced6}
 .dot{width:6px;height:6px;border-radius:50%;background:#888}
 .status-Aktiv .dot{background:var(--green)} .status-Undersøg .dot{background:var(--orange)} .status-Opsig .dot{background:var(--red)}
 .inline{width:100%;background:#101215;border:1px solid transparent;color:var(--text);border-radius:8px;padding:8px 9px}
 .inline:hover,.inline:focus{border-color:#3a4048;outline:none}.price{width:105px}
 .del{padding:7px 9px;color:#aaa;background:transparent}.del:hover{color:var(--red)}
 .side{padding:18px}
-.side h3{margin:0 0 14px;font-size:15px}
+.side h3{margin:0 0 14px;font-size:15px;font-weight:400}
 .catList{display:flex;flex-direction:column;gap:9px}
 .catRow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}
 .catName{font-size:12px;color:#c8ccd3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -66,25 +66,25 @@ tr:hover td{background:#171a1e}
 .legend .tag{background:transparent;padding:0}
 .modalBg{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;place-items:center;padding:20px;z-index:99}
 .modalBg.open{display:grid}.modal{width:min(640px,100%);background:#15171a;border:1px solid #32363d;border-radius:18px;padding:21px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
-.modal h2{margin:0 0 17px}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.full{grid-column:1/-1}
-label{font-size:12px;color:#abb0b8;font-weight:700}.field input,.field select,.field textarea{background:#0f1113;border:1px solid #30343a;color:white;border-radius:10px;padding:10px 11px;outline:none}
+.modal h2{margin:0 0 17px;font-size:22px;font-weight:400;line-height:1.3}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.full{grid-column:1/-1}
+label{font-size:12px;color:#abb0b8;font-weight:400}.field input,.field select,.field textarea{background:#0f1113;border:1px solid #30343a;color:white;border-radius:10px;padding:10px 11px;outline:none}
 textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-content:flex-end;gap:9px;margin-top:17px}
 .empty{padding:40px;text-align:center;color:var(--muted)}
 
 
 .infoBtn{
-  display:inline-flex;align-items:center;gap:7px;border:1px solid #343941;background:#101215;
-  color:#d8dce3;border-radius:9px;padding:8px 10px;font-weight:750
+  display:inline-flex;align-items:center;gap:6px;min-height:32px;
+  border:1px solid transparent;background:transparent;color:#b8bdc6;
+  border-radius:6px;padding:4px 6px;margin-left:-6px;font-size:13px;font-weight:400;
+  transition:color .15s,background .15s
 }
-.infoBtn:hover{background:#1c2025;border-color:#4a515b}
-.infoBtn .i{
-  width:18px;height:18px;border-radius:50%;display:grid;place-items:center;
-  background:#272c32;color:var(--yellow);font-size:11px;font-weight:900
-}
+.infoBtn:hover{color:var(--text);background:#24282e;border-color:transparent}
+.infoBtn:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.infoBtn svg{width:14px;height:14px;flex:none}
 .notePreview{color:#8f96a1;font-size:12px;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .detailMeta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .detailBox{background:#101215;border:1px solid #2f343b;border-radius:12px;padding:12px}
-.detailLabel{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#7d8490;font-weight:800;margin-bottom:5px}
+.detailLabel{font-size:12px;letter-spacing:.01em;color:#9ba2ae;font-weight:400;margin-bottom:5px}
 .detailValue{font-size:14px;color:#eef0f3}
 
 
@@ -99,13 +99,13 @@ textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-cont
 .calcLeft{display:flex;align-items:center;gap:12px;min-width:0}
 .calcBadge{
   width:34px;height:34px;border-radius:10px;background:var(--yellow);color:#111;
-  display:grid;place-items:center;font-weight:950
+  display:grid;place-items:center;font-weight:400
 }
-.calcTitle{font-weight:850}
+.calcTitle{font-weight:400}
 .calcSub{font-size:12px;color:var(--muted);margin-top:2px}
 .calcTotal{text-align:right}
-.calcTotal .label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
-.calcTotal .value{font-size:24px;font-weight:900;letter-spacing:-.03em;margin-top:2px}
+.calcTotal .label{font-size:12px;letter-spacing:.02em;color:var(--muted);font-weight:400}
+.calcTotal .value{font-size:24px;font-weight:400;letter-spacing:-.03em;margin-top:2px}
 .pickBox{
   width:18px;height:18px;accent-color:var(--yellow);cursor:pointer
 }
@@ -122,7 +122,7 @@ textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-cont
 .ddBtn{
   width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
   border:1px solid var(--line);background:#101215;color:var(--text);border-radius:10px;
-  padding:9px 11px;font-weight:650;cursor:pointer;white-space:nowrap
+  padding:9px 11px;font-weight:400;cursor:pointer;white-space:nowrap
 }
 .ddBtn:hover,.dd.open .ddBtn{border-color:#444a53;background:#14171a}
 .ddChevron{width:8px;height:8px;border-right:2px solid #9aa0aa;border-bottom:2px solid #9aa0aa;transform:rotate(45deg) translateY(-2px);transition:.15s}
@@ -135,11 +135,11 @@ textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-cont
 .dd.open .ddMenu{display:block}
 .ddOption{
   display:flex;align-items:center;gap:9px;width:100%;border:0;background:transparent;color:#d9dde3;
-  padding:9px 10px;border-radius:8px;font-weight:650;text-align:left;cursor:pointer
+  padding:9px 10px;border-radius:8px;font-weight:400;text-align:left;cursor:pointer
 }
 .ddOption:hover{background:#24282e;color:#fff}
 .ddOption.selected{background:#2a2e34;color:#fff}
-.ddOption .check{width:16px;color:var(--yellow);font-weight:900}
+.ddOption .check{width:16px;color:var(--yellow);font-weight:400}
 .rowDD{min-width:112px}
 .rowDD .ddBtn{padding:7px 9px;border-color:transparent;background:#101215;border-radius:8px}
 .rowDD .ddMenu{left:0;right:auto;min-width:145px}
@@ -162,9 +162,9 @@ textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-cont
 }
 .gateMark{
   width:48px;height:48px;border-radius:15px;background:var(--yellow);color:#111;
-  display:grid;place-items:center;font-weight:950;margin-bottom:18px
+  display:grid;place-items:center;font-weight:400;margin-bottom:18px
 }
-.gateCard h2{margin:0 0 8px;font-size:26px;letter-spacing:-.03em}
+.gateCard h2{margin:0 0 8px;font-size:26px;font-weight:400;letter-spacing:-.03em}
 .gateCard p{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.5}
 .gateField{display:flex;gap:9px}
 .gateField input{
@@ -174,6 +174,8 @@ textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-cont
 .gateField input:focus{border-color:#555c66}
 .gateError{min-height:18px;color:var(--red);font-size:12px;margin-top:8px}
 
+/* Keep changing totals aligned and easy to scan. */
+.heroValue,.metricValue,.calcTotal .value,.price{font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -294,7 +296,7 @@ textarea{min-height:90px;resize:vertical}.modalActions{display:flex;justify-cont
   <div class="modal">
     <div class="field full" style="margin-bottom:14px">
       <label>Systemnavn</label>
-      <input id="detailName" style="font-size:24px;font-weight:850;letter-spacing:-.02em">
+      <input id="detailName" style="font-size:24px;font-weight:400;letter-spacing:-.02em">
     </div>
 
     <div class="form">
@@ -484,7 +486,7 @@ function render(){
   <td><div class="rowStatus" data-status-id="${x.id}"></div></td>
   <td><input class="inline price" data-field="price" value="${esc(x.price)}" placeholder="0"></td>
   <td>
-    <button class="infoBtn" data-info-id="${x.id}"><span class="i">i</span><span>Se / redigér</span></button>
+    <button class="infoBtn" type="button" data-info-id="${x.id}" aria-label="Se og redigér ${esc(x.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 3 5 5-12 12-6 1 1-6L16 3Z"/><path d="m14 5 5 5"/></svg><span>Detaljer</span></button>
     <div class="notePreview">${esc(x.note || x.purpose || "Ingen note endnu")}</div>
   </td>
   <td><button class="del" title="Slet">✕</button></td>
